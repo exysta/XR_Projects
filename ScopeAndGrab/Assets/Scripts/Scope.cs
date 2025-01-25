@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,7 +7,7 @@ public class Scope : MonoBehaviour
 {
 public Animator animator;
 public InputActionReference action;
-
+public GameObject scopeOverlay;
 private Boolean isScoped = false;
     // Start is called before the first frame update
     void Start()
@@ -30,5 +31,23 @@ private Boolean isScoped = false;
     {
         isScoped = !isScoped;
         animator.SetBool("scoped",isScoped); 
+        scopeOverlay.SetActive(isScoped);
+        if (isScoped)
+            StartCoroutine(OnScope());
+        else
+            OnUnscoped();
+    }
+
+    void OnUnscoped()
+    {
+        scopeOverlay.SetActive(false);
+
+    }
+
+    IEnumerator OnScope()
+    {
+        yield return new WaitForSeconds(.2f);
+        scopeOverlay.SetActive(true);
+
     }
 }
