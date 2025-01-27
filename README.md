@@ -47,7 +47,22 @@ This part implements a grabbing system **without using the XR Interaction Toolki
     - **Translation**: Translation vectors from both controllers are added together.
     - **Rotation**: Quaternions from both controllers are multiplied to form a composite quaternion.
 
+---
+
+### Additional Feature: Double Rotation
+**Description**:  
+A feature to double the rotation applied to the grabbed object, enhancing rotation manipulation.
+
+**Implementation**:
+- After calculating the quaternion to be applied to the object, the magnitude of the rotation is doubled while keeping the rotation axis intact.
+- This is achieved by:
+  - Decomposing the quaternion into its angle-axis representation.
+  - Doubling the angle while preserving the axis.
+  - Reconstructing the quaternion with the modified angle.
+- The feature is on for both hands by default but could easily be toggled by a user input in a later implementation.
+
 **Goal**:  
-To ensure the manipulation feels natural for both one-handed and two-handed interactions.
+To improve the grabbing system and make rotations more dynamic when desired.
 
 ---
+
